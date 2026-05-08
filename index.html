@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>3rd Monthsary 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    font-family: 'Arial', sans-serif;
+    overflow: hidden;
+    background: linear-gradient(-45deg, #ff4d6d, #ff99ac, #ffd6e0, #ff758f);
+    background-size: 400% 400%;
+    animation: bgMove 10s ease infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px;
+  }
+
+  @keyframes bgMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  #open { display: none; }
+
+  /* ENVELOPE */
+  .envelope {
+    position: relative;
+    width: 320px;
+    height: 210px;
+    background: #ff4d6d;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+    transition: 0.6s ease;
+    z-index: 5;
+  }
+
+  .flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ff6b81;
+    clip-path: polygon(0 0, 100% 0, 50% 60%);
+    transform-origin: top;
+    transition: 0.8s ease;
+  }
+
+  .hint {
+    position: absolute;
+    bottom: -40px;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-size: 14px;
+    opacity: 0.8;
+  }
+
+  /* LETTER PAGE */
+  .letter-page {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(8px);
+    justify-content: center;
+    align-items: center;
+  }
+
+  .note {
+    background: #fff8c6;
+    max-width: 550px;
+    width: 90%;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.4);
+    border: 2px dashed #ff4d6d;
+    transform: scale(0.8);
+    opacity: 0;
+    transition: 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+  }
+
+  /* HEADLINE */
+  .note h2 {
+    color: #ff4d6d;
+    font-family: 'Great Vibes', cursive;
+    font-size: 50px;
+    margin-bottom: 25px;
+    font-weight: normal;
+  }
+
+  /* MESSAGE BODY */
+  .note p {
+    font-family: 'Playfair Display', serif;
+    font-size: 19px;
+    line-height: 1.6;
+    color: #333;
+    text-align: center;
+    margin: 0;
+    font-style: italic;
+  }
+
+  /* SIGNATURE (Your Name) */
+  .signature {
+    display: block;
+    text-align: right;
+    margin-top: 30px;
+    font-family: 'Great Vibes', cursive;
+    font-size: 35px;
+    color: #ff4d6d;
+  }
+
+  /* CELEBRATION ITEMS */
+  .celebration-item {
+    position: absolute;
+    pointer-events: none;
+    z-index: 15;
+    opacity: 0;
+  }
+
+  @keyframes slowFloat {
+    0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+    20% { opacity: 0.8; }
+    100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+  }
+
+  /* TRIGGER */
+  #open:checked ~ .envelope { transform: scale(0); opacity: 0; }
+  #open:checked ~ .letter-page { display: flex; animation: fadeIn 0.8s forwards; }
+  @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
+  #open:checked ~ .letter-page .note { transform: scale(1); opacity: 1; }
+
+</style>
+</head>
+
+<body>
+
+<input type="checkbox" id="open" onclick="startSurprise()">
+
+<label for="open" class="envelope">
+  <div class="flap"></div>
+  <div class="hint">Tap to open, Milady 💌</div>
+</label>
+
+<div class="letter-page">
+  <div class="note">
+    <h2>Happy 3rd Monthsary, Milady!</h2>
+    <p>
+      Sa tinuod ra, dili man sajon karajaw ang ato na agihan. Jaoy gajod mga adlaw na kapoy, ug mga panahon nga lisod sabton ang sitwasyon. <br><br>
+      Pero bisan man sa tanan kalisod na ato gi-agihan, nagpasalamat ako kay waya ta ni-give up. Salamat kay bisan kapoy, mas gipili gihapon nimo na magpabilin sa ako kilid. <br><br>
+      Nagpamatood sa ato na ang gugma dili ra kung kalipay ang anaa, kundi ang pagpili sa isig-osa bisan unsa pay moabot nga kalisod sa atoa. Gihigogma ko kaw karajaw, Madam, ug andam ako makigbisog sa imo hangtod sa kahangturan.<br><br>
+    
+      I love you today, I love you tomorrow! 💜 <br><br>
+    </p>
+    
+    <span class="signature">- Raven Guibao</span>
+  </div>
+</div>
+
+<script>
+  function startSurprise() {
+    setTimeout(() => {
+      setInterval(createCelebrationItem, 500); 
+    }, 800);
+  }
+
+  function createCelebrationItem() {
+    const items = ['💖', '💕', '✨', '❤️'];
+    const item = document.createElement('div');
+    item.className = 'celebration-item';
+    item.innerHTML = items[Math.floor(Math.random() * items.length)];
+    
+    item.style.left = Math.random() * 100 + "vw";
+    item.style.top = "100vh";
+    item.style.fontSize = (Math.random() * 20 + 15) + "px";
+    
+    const duration = Math.random() * 3 + 7; 
+    item.style.animation = `slowFloat ${duration}s linear forwards`;
+    
+    document.body.appendChild(item);
+
+    setTimeout(() => {
+      item.remove();
+    }, duration * 1000);
+  }
+</script>
+
+</body>
+</html>
